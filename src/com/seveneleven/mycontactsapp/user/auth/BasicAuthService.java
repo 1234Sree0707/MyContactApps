@@ -6,7 +6,7 @@ import java.util.Base64;
 import java.util.HashMap;
 
 public class BasicAuthService {
-
+	
 	public static User authenticate(
 			String authHeader,
 			HashMap<String, User> users
@@ -21,7 +21,7 @@ public class BasicAuthService {
 		String password = parts[1];
 
 		for (User u : users.values()) {
-			if (u.username.equals(username)
+			if (u.getUsername().equals(username)
 					&& u.getPassword().equals(password)) {
 				return u; 
 			}

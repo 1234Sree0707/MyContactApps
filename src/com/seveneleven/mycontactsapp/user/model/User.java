@@ -16,6 +16,18 @@ public abstract class User {
 		this.id=id;
 		
 	}
+	public String getUsername() {
+		return username;
+	}
+	public static void setUsername(String username) {
+		username=username;
+	}
+	public static void setPassword(String password) {
+		password=password;
+	}
+	public static void setEmail(String email) {
+		email=email;
+	}
 	public String getPassword() {
 		return password;
 	}
