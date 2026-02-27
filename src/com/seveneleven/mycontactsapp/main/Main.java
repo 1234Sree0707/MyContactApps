@@ -4,6 +4,8 @@ import com.seveneleven.mycontactsapp.user.model.PremiumUser;
 import com.seveneleven.mycontactsapp.user.model.User;
 import com.seveneleven.mycontactsapp.user.utilities.PasswordHash;
 import com.seveneleven.mycontactsapp.user.validation.Validation;
+import com.seveneleven.mycontactsapp.user.auth.BasicAuthService;
+import com.seveneleven.mycontactsapp.user.auth.OAuthService;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.HashMap;
@@ -53,7 +55,20 @@ public class Main {
 			System.out.println("Please change password");
 
 		}
-		
+		String saltvalue=PasswordHash.generateSalt();
+		String hashvalue=PasswordHash.passwordHash(password, saltvalue);
+		System.out.println("Hash of password is "+hashvalue);
+		String basAuth=BasicAuthService.generate(username, password);
+		User loggedInUser=BasicAuthService.authenticate(basAuth, hmap);
+		if(loggedInUser!=null) {
+			System.out.println("Basic Authentication Successful");
+		}else {
+			System.out.println("Basic Authentication failed");
+		}
+		String token=OAuthService.generateToken(loggedInUser);
+		System.out.println("OAuth token generated");
+		System.out.println(token);
+
 	}
 
 }
