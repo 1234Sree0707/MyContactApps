@@ -175,8 +175,8 @@ public class Main {
 		    } while (add.equalsIgnoreCase("yes"));
 
 		    System.out.println("========Contacts saved successfully========");
-		   // System.out.println("Your Contacts:");
-		   // loggedInUser.viewContacts();
+		    System.out.println("Your Contacts:");
+		   loggedInUser.viewContacts();
 		}
 
 	}

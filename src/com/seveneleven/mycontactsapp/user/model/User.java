@@ -27,7 +27,18 @@ public abstract class User {
 		contacts.add(contact);
 		System.out.println("Contact added successfully.");
 	}
-	
+	public void viewContacts() {
+		if(contacts.isEmpty()) {
+			System.out.println("No contact found");
+			return;
+		}
+		int i=1;
+		for(Contact c:contacts) {
+			System.out.println(i+"]");
+			i++;
+			System.out.println(c);
+		}
+	}
 	public String getId() {
 		return id;
 	}
