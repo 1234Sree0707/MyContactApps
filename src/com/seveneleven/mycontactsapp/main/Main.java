@@ -7,6 +7,8 @@ import com.seveneleven.mycontactsapp.user.validation.Validation;
 import com.seveneleven.mycontactsapp.user.auth.BasicAuthService;
 import com.seveneleven.mycontactsapp.user.auth.OAuthService;
 import com.seveneleven.mycontactsapp.modify.ModifyUserProfile;
+import com.seveneleven.mycontactsapp.contacts.Contact;
+
 import java.util.Scanner;
 import java.util.Random;
 import java.util.HashMap;
@@ -32,6 +34,9 @@ public class Main {
 
 		}while(!Validation.isValidEmail(email));
 		System.out.println("");
+		System.out.println("Enter your phone number:");
+		String phone=sc.nextLine();
+		System.out.println("");
 		System.out.print("Enter your age:");
 		int age=sc.nextInt();
 		System.out.println("");
@@ -41,6 +46,7 @@ public class Main {
 		System.out.println("");
 		System.out.print("Enter your password:");
 		String password=sc.nextLine();
+		ModifyUserProfile md=new ModifyUserProfile();
 		System.out.println("Please wait! Checking password strength");
 		if(Validation.isSafePassword(password)) {
 			System.out.println("Password is safe");
@@ -55,7 +61,7 @@ public class Main {
 
 				}
 			}while(!Validation.isSafePassword(password));
-			ModifyUserProfile.modifyPassword(password);
+		
 		}
 		System.out.println("");
 		System.out.println("Enter the account type:");
@@ -64,10 +70,10 @@ public class Main {
 		String id;
 		if(type.equalsIgnoreCase("free")) {
 			id = UUID.randomUUID().toString();
-			user=new FreeUser(name,email,username,password,age,id);
+			user=new FreeUser(name,email,phone,username,password,age,id);
 		}else {
 			id = UUID.randomUUID().toString();
-			user=new PremiumUser(name,email,username,password,age,id);
+			user=new PremiumUser(name,email,phone,username,password,age,id);
 
 		}
 		hmap.put(id,user);
@@ -100,6 +106,7 @@ public class Main {
 			System.out.println("Loggin Failed, please try again later");
 			return;
 		}	
+		System.out.println("========Logged In========");
 		String ismodify;
 		System.out.println("Do you want to modfiy the profile information(yes/no)");
 		ismodify=sc.nextLine();
@@ -109,7 +116,7 @@ public class Main {
 			if(userchange.equals("yes")) {
 				System.out.println("Enter the new username");
 				String newusername=sc.nextLine();
-				ModifyUserProfile.modifyUsername(newusername);
+				md.modifyUsername(loggedInUser,newusername);
 
 			}
 			System.out.println("Do you want to change the password(yes/no)");
@@ -121,7 +128,7 @@ public class Main {
 				System.out.println("Please wait! Checking password strength");
 				if(Validation.isSafePassword(user.getPassword())) {
 					System.out.println("Password is safe");
-					ModifyUserProfile.modifyPassword(newpassword);
+					md.modifyPassword(loggedInUser,newpassword);
 
 				}else {
 					String newpassword1;
@@ -135,7 +142,7 @@ public class Main {
 
 						}
 					}while(!Validation.isSafePassword(newpassword1));
-					ModifyUserProfile.modifyPassword(newpassword1);
+					md.modifyPassword(loggedInUser,newpassword1);
 				}
 
 			}
@@ -144,9 +151,34 @@ public class Main {
 			if(emailchange.equals("yes")) {
 				System.out.println("Enter the new email id:");
 				String newemail=sc.nextLine();
-				ModifyUserProfile.modifyEmail(newemail);
+				md.modifyEmail(loggedInUser,newemail);
 			}
 		}
+		Contact contact;
+		if (loggedInUser != null) {
+		    String add;
+		    do {
+		        System.out.println("Do you want to add a contact(yes/no)");
+		        add = sc.nextLine();
+
+		        if (add.equalsIgnoreCase("yes")) {
+		            System.out.println("Enter contact name:");
+		            String contactname = sc.nextLine();
+		            System.out.println("Enter contact phone:");
+		            String contactphone = sc.nextLine();
+		            System.out.println("Enter contact email:");
+		            String contactemail = sc.nextLine();
+
+		            contact = new Contact(contactname, contactphone, contactemail);
+		            loggedInUser.addContact(contact);
+		        }
+		    } while (add.equalsIgnoreCase("yes"));
+
+		    System.out.println("========Contacts saved successfully========");
+		   // System.out.println("Your Contacts:");
+		   // loggedInUser.viewContacts();
+		}
+
 	}
 }
 

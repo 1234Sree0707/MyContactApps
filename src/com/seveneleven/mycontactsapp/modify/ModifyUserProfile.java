@@ -2,17 +2,17 @@ package com.seveneleven.mycontactsapp.modify;
 import  com.seveneleven.mycontactsapp.user.model.User;
 
 public class ModifyUserProfile {
-	public static void modifyUsername(String newusername) {
-		User.setUsername(newusername);
+	public  void modifyUsername(User user,String newusername) {
+		user.setUsername(newusername);
 		System.out.println("Username changed successfully");
 		
 	}
-	public static void modifyPassword(String newpassword) {
-		User.setPassword(newpassword);
+	public  void modifyPassword(User user,String newpassword) {
+		user.setPassword(newpassword);
 		System.out.println("Password changed successfully");
 	}
-	public static void modifyEmail(String newemail) {
-		User.setEmail(newemail);
+	public  void modifyEmail(User user,String newemail) {
+		user.setEmail(newemail);
 		System.out.println("Email changed successfully");
 	}
 }
