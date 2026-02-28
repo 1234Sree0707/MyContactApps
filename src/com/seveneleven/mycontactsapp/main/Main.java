@@ -8,6 +8,8 @@ import com.seveneleven.mycontactsapp.user.auth.BasicAuthService;
 import com.seveneleven.mycontactsapp.user.auth.OAuthService;
 import com.seveneleven.mycontactsapp.modify.ModifyUserProfile;
 import com.seveneleven.mycontactsapp.contacts.Contact;
+import com.seveneleven.mycontactsapp.modify.ModifyContact;
+
 
 import java.util.Scanner;
 import java.util.Random;
@@ -160,14 +162,27 @@ public class Main {
 		    do {
 		        System.out.println("Do you want to add a contact(yes/no)");
 		        add = sc.nextLine();
+		        String contactname,contactphone,contactemail;
 
 		        if (add.equalsIgnoreCase("yes")) {
+		            
 		            System.out.println("Enter contact name:");
-		            String contactname = sc.nextLine();
-		            System.out.println("Enter contact phone:");
-		            String contactphone = sc.nextLine();
-		            System.out.println("Enter contact email:");
-		            String contactemail = sc.nextLine();
+		            contactname = sc.nextLine();
+		            do{
+		            	System.out.println("Enter contact no:");
+		                contactphone = sc.nextLine();
+		                if(!Validation.isValidPhone(contactphone)) {
+		                	System.out.println("Enter a valid contact no");
+		            	}
+		            }while(!Validation.isValidPhone(contactphone));
+		            do {
+		            	System.out.println("Enter contact email:");
+			            contactemail = sc.nextLine();
+			            if(!Validation.isValidEmail(contactemail)) {
+			            	System.out.println("Enter a valid email");
+			            }
+		            }while(!Validation.isValidEmail(contactemail));
+		      
 
 		            contact = new Contact(contactname, contactphone, contactemail);
 		            loggedInUser.addContact(contact);
@@ -176,8 +191,59 @@ public class Main {
 
 		    System.out.println("========Contacts saved successfully========");
 		    System.out.println("Your Contacts:");
-		   loggedInUser.viewContacts();
-		}
+		    loggedInUser.viewContacts();
+		    System.out.println("Enter the number of the contact you want to edit:");
+		    int choice = Integer.parseInt(sc.nextLine());
+		    Contact contactToEdit = loggedInUser.getContacts().get(choice - 1);
+		    ModifyContact modifier = new ModifyContact();
+		    String continueEditing;
+		    if (choice < 1 || choice > loggedInUser.getContacts().size()) {
+		        System.out.println("Invalid contact number.");
+		        return;
+		    }else {
+		    	do {
+		        System.out.println("What do you want to edit? (name/email/phone)");
+		        String field = sc.nextLine();
+
+		        switch(field.toLowerCase()) {
+		            case "name":
+		                System.out.println("Enter new name:");
+		                String newName = sc.nextLine();
+		                modifier.modifyName(contactToEdit, newName);
+		                break;
+		            case "email":
+		            	String newEmail;
+		            	do {
+			            	System.out.println("Enter contact email:");
+				            newEmail = sc.nextLine();
+				            if(!Validation.isValidEmail(newEmail)) {
+				            	System.out.println("Enter a valid email");
+				            }
+			            }while(!Validation.isValidEmail(newEmail));
+		            	modifier.modifyEmail(contactToEdit,newEmail);
+		                break;
+		            case "phone":
+		            	String newPhone;
+		            	 do{
+				            System.out.println("Enter contact no:");
+				            newPhone = sc.nextLine();
+				            if(!Validation.isValidPhone(newPhone)) {
+				                	System.out.println("Enter a valid contact no");
+				            }
+				         }while(!Validation.isValidPhone(newPhone));
+		            	 modifier.modifyPhone(contactToEdit, newPhone);
+		            default:
+		                System.out.println("Invalid choice.");
+		        }
+
+		        System.out.println("Do you want to edit something else for this contact? (yes/no)");
+		        continueEditing = sc.nextLine();
+		        } while (continueEditing.equalsIgnoreCase("yes"));
+		    }
+		    System.out.println("Contact changed successfully");
+		    loggedInUser.viewContacts();
+	}
+		
 
 	}
 }

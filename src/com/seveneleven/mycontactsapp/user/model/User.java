@@ -39,6 +39,10 @@ public abstract class User {
 			System.out.println(c);
 		}
 	}
+	public List<Contact> getContacts() {
+	    return contacts;
+	}
+
 	public String getId() {
 		return id;
 	}

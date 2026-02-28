@@ -18,6 +18,16 @@ public class Contact {
 	public String getemail() {
 		return email;
 	}
+	public void setName(String name) {
+		this.name=name;
+		
+	}
+	public void setPhone(String phone) {
+		this.phone=phone;
+	}
+	public void setEmail(String email) {
+		this.email=email;
+	}
 	@Override
     public String toString() {
         return "Name: " + name + ", Phone: " + phone + ", Email: " + email;

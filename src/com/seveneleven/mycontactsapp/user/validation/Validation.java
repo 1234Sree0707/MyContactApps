@@ -14,6 +14,10 @@ public class Validation {
 		String regex="^[A-Za-z-0-9+_.-]+@[A-Za-z0-9.-]+$";
 		return email.matches(regex);
 	}
+	public static boolean isValidPhone(String phone) {
+		String regex = "^[6-9][0-9]{9}$";
+		return phone.matches(regex);
+	}
 	
 	
 }
