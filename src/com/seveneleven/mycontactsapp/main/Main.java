@@ -9,6 +9,7 @@ import  com.seveneleven.mycontactsapp.controller.DeleteContact;
 import com.seveneleven.mycontactsapp.controller.BulkOperation;
 import com.seveneleven.mycontactsapp.controller.SearchContactController;
 import com.seveneleven.mycontactsapp.search.*;
+import com.seveneleven.mycontactsapp.controller.FilterContactController;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -64,6 +65,10 @@ public class Main {
             System.out.println("Do you want to search contacts? (yes/no)");
             if (sc.nextLine().equalsIgnoreCase("yes")) {
                 SearchContactController.search(loggedInUser, sc);
+            }
+            System.out.println("Do you want to apply filters? (yes/no)");
+            if (sc.nextLine().equalsIgnoreCase("yes")) {
+                FilterContactController.filter(loggedInUser, sc);
             }
         } finally {
             sc.close();
