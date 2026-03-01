@@ -30,10 +30,12 @@ public class Contact {
 	}
 	private String tag;
 
-	
+	public void setTag(String tag) {
+	    this.tag = tag;
+	}
 	@Override
     public String toString() {
-        return "Name: " + name + ", Phone: " + phone + ", Email: " + email;
+        return "Name: " + name + ", Phone: " + phone + ", Email: " + email+", Tag: "+tag;
     }
 
 

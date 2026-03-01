@@ -40,7 +40,24 @@ public class Main {
             if (deleteAns.equalsIgnoreCase("yes")) {
                 DeleteContact.deleteContact(loggedInUser, sc);
             }
-            
+            System.out.println("Bulk Operations:");
+            System.out.println("1. Bulk Delete");
+            System.out.println("2. Bulk Tag");
+            System.out.println("3. Export Contacts");
+
+            String choice = sc.nextLine();
+
+            switch (choice) {
+                case "1":
+                    BulkOperation.bulkDelete(loggedInUser, sc);
+                    break;
+                case "2":
+                    BulkOperation.bulkTag(loggedInUser, sc);
+                    break;
+                case "3":
+                    BulkOperation.bulkExport(loggedInUser);
+                    break;
+            }
         } finally {
             sc.close();
         }
