@@ -28,6 +28,9 @@ public class Contact {
 	public void setEmail(String email) {
 		this.email=email;
 	}
+	private String tag;
+
+	
 	@Override
     public String toString() {
         return "Name: " + name + ", Phone: " + phone + ", Email: " + email;
