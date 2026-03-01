@@ -1,1 +1,0 @@
-package com.seveneleven.mycontactsapp.user.auth;

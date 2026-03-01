@@ -7,6 +7,8 @@ import com.seveneleven.mycontactsapp.controller.RegistrationController;
 import com.seveneleven.mycontactsapp.user.model.User;
 import  com.seveneleven.mycontactsapp.controller.DeleteContact;
 import com.seveneleven.mycontactsapp.controller.BulkOperation;
+import com.seveneleven.mycontactsapp.controller.SearchContactController;
+import com.seveneleven.mycontactsapp.search.*;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -40,7 +42,8 @@ public class Main {
             if (deleteAns.equalsIgnoreCase("yes")) {
                 DeleteContact.deleteContact(loggedInUser, sc);
             }
-            System.out.println("Bulk Operations:");
+            System.out.println("");
+            System.out.println("========Bulk Operations:");
             System.out.println("1. Bulk Delete");
             System.out.println("2. Bulk Tag");
             System.out.println("3. Export Contacts");
@@ -57,6 +60,10 @@ public class Main {
                 case "3":
                     BulkOperation.bulkExport(loggedInUser);
                     break;
+            }
+            System.out.println("Do you want to search contacts? (yes/no)");
+            if (sc.nextLine().equalsIgnoreCase("yes")) {
+                SearchContactController.search(loggedInUser, sc);
             }
         } finally {
             sc.close();
