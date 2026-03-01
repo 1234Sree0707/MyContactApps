@@ -1,6 +1,9 @@
 package com.seveneleven.mycontactsapp.contacts;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import com.seveneleven.mycontactsapp.tag.Tag;
 
 public class Contact {
 
@@ -16,11 +19,21 @@ public class Contact {
         this.phone = phone;
         this.email = email;
         this.tag = "Untagged";
-        this.dateAdded = LocalDateTime.now(); // ✅ FIXED
+        this.dateAdded = LocalDateTime.now(); 
         this.contactCount = 0;
     }
+    private Set<Tag> tags = new HashSet<>();
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
 
-    // ===== GETTERS =====
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
     public String getName() {
         return name;
     }
@@ -45,7 +58,6 @@ public class Contact {
         return contactCount;
     }
 
-    // ===== SETTERS =====
     public void setName(String name) {
         this.name = name;
     }
@@ -71,8 +83,7 @@ public class Contact {
         return "Name: " + name +
                ", Phone: " + phone +
                ", Email: " + email +
-               ", Tag: " + tag +
-               ", Added On: " + dateAdded +
-               ", Frequency: " + contactCount;
+               ", Tags: " + tags +
+               ", Added On: " + dateAdded;
     }
 }

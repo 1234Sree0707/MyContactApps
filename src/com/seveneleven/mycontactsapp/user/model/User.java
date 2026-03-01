@@ -1,5 +1,8 @@
 package com.seveneleven.mycontactsapp.user.model;
 import com.seveneleven.mycontactsapp.contacts.Contact;
+import com.seveneleven.mycontactsapp.tag.Tag;
+import java.util.HashSet;
+import java.util.Set;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,14 @@ public abstract class User {
 		this.age=age;
 		this.id=id;
 		
+	}
+	protected Set<Tag> availableTags = new HashSet<>();
+	public void addTag(Tag tag) {
+	    availableTags.add(tag);
+	}
+
+	public Set<Tag> getAvailableTags() {
+	    return availableTags;
 	}
 	public void addContact(Contact contact) {
 		contacts.add(contact);
