@@ -1,9 +1,5 @@
 /*
- UC12 – Main Application Flow
-
- This class is the entry point of the Contacts Application.
- It controls the full flow of the program step by step.
-
+UC12 
 The main program 
  1. Takes user input using Scanner
  2. Registers a new user
