@@ -1,3 +1,22 @@
+/*
+UC11 
+
+The main program 
+ 1. Takes user input using Scanner
+ 2. Registers a new user
+ 3. Logs in the registered user
+ 4. Allows user to update profile details
+ 5. Allows user to manage contacts (add/view/update)
+ 6. Provides option to delete a single contact
+ 7. Provides bulk operations:
+    Bulk delete contacts
+    Bulk tag contacts
+    Export contacts
+ 8. Allows searching contacts
+ 9. Allows filtering contacts
+
+
+*/
 package com.seveneleven.mycontactsapp.main;
 
 import com.seveneleven.mycontactsapp.controller.ContactController;
